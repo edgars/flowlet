@@ -1,0 +1,80 @@
+<!-- 
+  Simple example to demonstrate EasyRest
+ -->
+<project name="flowlet" default="war" basedir=".">
+	
+	<propertyfile file="build.properties" />
+
+	<property name="src.dir" value="src/main/java" />
+
+	<property name="web.dir" value="src/main/web" />
+
+	<property name="build.dir" value="bin" />
+
+	<property name="dist.dir" value="dist" />
+
+	<property name="lib.dir" value="lib" />
+
+	<!-- Here you will inform the default JBoss  -->
+	<property name="jboss.deploy.dir" value="/opt/java/jboss/as/jboss-4.2.2.GA/server/jbpm/deploy" />
+
+
+	<target name="compile" depends="clean"
+		description="Compile the Java source code">
+
+		<mkdir dir="${build.dir}/classes" />
+
+		<javac srcdir="${src.dir}" destdir="${build.dir}/classes"
+			debug="${javac.debug}" optimize="${javac.optimize}" nowarn="on">
+
+			<classpath>
+
+				<fileset dir="${lib.dir}">
+
+					<include name="**/*.jar" />
+
+				</fileset>
+
+			</classpath>
+
+		</javac>
+
+		<copydir src="${src.dir}" dest="${build.dir}/**"
+			includes="**/*.properties,**/*.xml" />
+	</target>
+	<!--make the .war file -->
+	
+
+
+	<target name="war"
+		description="Make the war file .war">
+		<mkdir dir="${dist.dir}" />
+		<war destfile="${dist.dir}/flowlet.war"
+			webxml="${web.dir}/web.xml">
+
+			<!--Inclui classes -->
+
+			<classes dir="${build.dir}" />
+			<lib dir="${lib.dir}" />
+			<!-- Include JSPS if present -->
+			<fileset dir="${web.dir}/">
+				<include name="**/*.*" />
+				<exclude name="**/web.xml" />
+			</fileset>
+		</war>
+		<delete file="${jboss.deploy.dir}/flowlet.war"/>
+		<copy file="${dist.dir}/flowlet.war" todir="${jboss.deploy.dir}"/>
+	
+	</target>
+
+	<!--clean-->
+
+	<target name="clean" description="Clean the build dir">
+
+		<delete dir="build" />
+
+		<delete dir="${dist.dir}" />
+
+	</target>
+
+</project>
