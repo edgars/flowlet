@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition  xmlns="urn:jbpm.org:jpdl-3.2"  name="licenciamento">
+
+
+	<swimlane name="publico">
+		<assignment actor-id="proprietario"></assignment>
+	</swimlane>
+
+	<swimlane name="funcionario">
+		<assignment actor-id="despachante"></assignment>
+	</swimlane>
+
+
+	<start-state name="inicio">
+		<transition to="entrega-id-pgto"></transition>
+	</start-state>
+
+
+	<task-node name="entrega-id-pgto">
+		<task name="pagar">
+			<assignment class="bpmsample.rest.UserTasksAssignment"></assignment>
+		</task>
+		<task name="entregar recibo">
+			<assignment class="bpmsample.rest.UserTasksAssignment"></assignment>
+		</task>
+
+		<transition to="entrega-id-vistoria"></transition>
+	</task-node>
+
+	<task-node name="entrega-id-vistoria">
+		<task name="entrega-vistoria">
+			<assignment class="bpmsample.rest.UserTasksAssignment"></assignment>
+		</task>
+		<transition to="envia-documento"></transition>
+	</task-node>
+
+	<task-node name="envia-documento">
+		<task name="envia-documento">
+			<assignment class="bpmsample.rest.UserTasksAssignment"></assignment>
+		</task>
+		<transition to="fim"></transition>
+	</task-node>
+
+
+	<end-state name="fim"></end-state>
+
+
+</process-definition>

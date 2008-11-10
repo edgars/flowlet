@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root-container name="licenciamento" width="852" height="474">
+  <node name="inicio" x="11" y="59" width="141" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="entrega-id-pgto" x="246" y="73" width="132" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="entrega-id-vistoria" x="246" y="131" width="132" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="envia-documento" x="246" y="190" width="132" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="fim" x="429" y="74" width="132" height="36"/>
+</root-container>
